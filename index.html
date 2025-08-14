@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLECOFFEE ZONE</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- My Style -->
+    <link rel="stylesheet" href="CSS/Style.css">
+
+    <!-- AlpineJS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- App -->
+     <script src="src/app.js" async></script>
+
+    <!-- Midtrans -->
+      <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" 
+       data-client-key="Mid-client-SleacSho8_F0ahDT"></script>
+  </head>
+
+  <body>
+    <!-- navbar start -->
+    <nav class="navbar" x-data>
+      <a href="#" class="navbar-logo">BLEYERR<span> COFFEE ZONE </span> </a>
+      <div class="navbar-nav">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#Menu">Menu</a>
+        <a href="#products">Pembelian</a>
+        <a href="#contact">Kontak</a>
+        <a href="#keuangan">keuangan</a>
+        <a href="https://dashboard.sandbox.midtrans.com/beta/transactions?start_created_at=2025-06-22T00%3A00%3A00%2B07%3A00&end_created_at=2025-07-23T23%3A59%3A59%2B07%3A00">midtrans</a>
+
+      </div>
+
+      <div class="navbar-extra">
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
+        </a>
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+
+      <!-- Search Form start -->
+       <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box"><i data-feather="search"></i></label>
+       </div>
+      <!-- Search Form end -->
+
+      <!-- Shopping Cart start -->
+      <div class="shopping-cart">
+       <template x-for="(item, index) in $store.cart.items" x-keys="index">
+        <div class="cart-item">
+          <img :src="`img/products/${item.img}`" :alt="item.name">
+          <div class="item-detail">
+            <h3 x-text="item.name"></h3>
+            <div class="item-price">
+              <span x-text="rupiah(item.price)"></span> &times;
+              <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+              <span x-text="item.quantity"></span>
+              <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+              <span x-text="rupiah(item.total)"></span>
+            </div>
+          </div>
+        </div>
+       </template>
+       <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Cart is Empty</h4>
+       <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
+
+       <div class="form-container" x-show="$store.cart.items.length">
+        <form action="" id="checkoutForm">
+          <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+          <input type="hidden" name="total" x-model="$store.cart.total">
+          <h5>Customer Detail</h5>
+
+          <label for="name">
+            <span>Name</span>
+            <input type="text" name="name" id="name">
+          </label>
+
+          <label for="phone">
+            <span>Phone</span>
+            <input type="number" name="phone" id="phone">
+          </label>
+
+          <label for="email">
+            <span>Email</span>
+            <input type="text" name="email" id="email">
+          </label>
+
+          <button class="checkout-button disabled" type="submit" id="checkout-buttons" value="checkout">Checkout</button>
+        </form>
+       </div>
+      </div>
+    </nav>
+    <!-- Shopping Cart end -->
+    
+    </nav>
+    <!-- navbar end -->
+
+    <!-- Hero Section start -->
+    <section class="hero" id="home">
+      <main class="content">
+        <h1>Mari Nikmati Secangkir <span>Kopi</span></h1>
+        <p>
+          Secangkir kopi yang nikmat berasal dari olahan biji kopi berkualitas!
+        </p>
+        <a href="#products" class="cta">Beli Sekarang</a>
+      </main>
+    </section>
+    <!-- Hero Section end -->
+
+    <!-- About Section start -->
+    <section id="about" class="about">
+      <h2><span>Tentang</span> Kami</h2>
+      <div class="row">
+        <div class="about-img">
+          <img src="img/tentang-kami.jpeg..jpg" alt="Tentang Kami" />
+        </div>
+        <div class="content">
+          <h3>Kenapa memilih kopi kami?</h3>
+          <p>
+            Kami menyediakan berbagai macam kopi dengan teknik penyajian yang berbeda tentunya dengan perhatian dan standar kualitas yang tinggi dalam tahap pembuatan kopi. Anda dapat menikmati berbagi macam kopi dengan harga yang cukup terjangkau dengan kualitas yang baik, pelayanan yang ramah, dan rasa yang konsisten dan unik.
+          </p>
+          <p>
+            Menggunakan produk dan bahan berkualitas sehingga kopi yang disajikan memiliki rasa kopi yang tetap segar dan nikmat. Anda dapat secara langsung membuktikan bagaimana cara menikmati kopi yang enak dengan harga yang pas. Apakah anda ingin mencobanya?  
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section end -->
+
+    <!-- Menu Section start -->
+    <section id="Menu" class="Menu">
+      <h2><span>Menu</span> Kami</h2>
+      <p>
+        Menyediakan berbagai macam kopi yang menjadi pilihan untuk dinikmati diantaranya seperti kopi - kopi dibawah ini.
+      </p>
+
+      <div class="row">
+        <div class="Menu-card">
+          <img src="img/menu/1.jpg..jpg" alt="Kopiston espresso" class="Menu-card-img" />
+          <h3 class="Menu-card">- kopiston espresso -</h3>
+          <p> Kopi hitam pekat dan kaya rasa dengan ciri khas rasa yang kuat, sedikit pahit dan manis yang seimbang.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/2.jpg..jpg" alt="Hot crash coffee" class="Menu-card-img" />
+          <h3 class="Menu-card">- Hot crash coffee -</h3>
+          <p> Kopi hitam pekat dengan ciri khas rasa pahit yang disajikan dalam keadaan panas, cocok untuk menghangatkan suasana</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/3.jpg..jpg" alt="Hot coffee tempoe doeloe" class="Menu-card-img" />
+          <h3 class="Menu-card">- Hot coffee tempoe doeloe -</h3>
+          <p> Kopi hitam yang disajikan dalam keadaan panas menggunakan resep klasik tempo dulu, menghadirkan rasa autentik dan nostalgia.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/4.jpg..jpg" alt="Hot coffee tea" class="Menu-card-img" />
+          <h3 class="Menu-card">- Hot coffee tea -</h3>
+          <p> Kombinasi unik antara kopi dan teh hangat, menghasilkan rasa yang kaya dan aromatik, memberikan pengalaman minum berbeda antara kopi dan teh tradisional. </p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/5.jpg..jpg" alt="Hot drip coffee" class="Menu-card-img" />
+          <h3 class="Menu-card">- Hot drip coffee -</h3>
+          <p>Perpaduan kopi espresso yang kuat dengan sentuhan susu dan whipped cream lembut, memberikan sensasi kopi yang kaya dan creamy untuk pecinta kopi sejati.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/6.jpg..jpg" alt="Hot Frenchpress Coffee" class="Menu-card-img" />
+          <h3 class="Menu-card">- Hot Frenchpress Coffee -</h3>
+          <p>Perpaduan kopi espresso yang kuat dengan sentuhan susu dan whipped cream lembut, memberikan sensasi kopi yang kaya dan creamy untuk pecinta kopi sejati.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/7.jpg..jpg" alt="ice Coffee Palm Sugar" class="Menu-card-img" />
+          <h3 class="Menu-card">- ice Coffee Palm Sugar -</h3>
+          <p>Kopi dingin manis alami dengan gula aren yang memberikan sentuhan rasa karamel dan legit, menyegarkan di cuaca panas.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/8.jpg..jpg" alt="Ice Coffee Sweet Milk" class="Menu-card-img" />
+          <h3 class="Menu-card">- Ice Coffee Sweet Milk -</h3>
+          <p>Kopi dingin yang lembut dan manis dengan tambahan susu manis, memberikan rasa creamy dan sejuk. Minuman ini mudah disukai semua kalangan, cocok dinikmati kapan saja.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/9.jpg..jpg" alt="Biosolar" class="Menu-card-img" />
+          <h3 class="Menu-card">- Biosolar -</h3>
+          <p>Perpaduan antara susu dengan sirup mocca, memberikan sensasi creamy yang cocok untuk pecinta non kopi.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/10.jpg..jpg" alt="Premium" class="Menu-card-img" />
+          <h3 class="Menu-card">- Premium -</h3>
+          <p>Perpaduan antara susu dengan sirup markisa, memberikan sensasi creamy yang cocok untuk pecinta non kopi.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/11.jpg..jpg" alt="Pertalite" class="Menu-card-img" />
+          <h3 class="Menu-card">- Pertalite -</h3>
+          <p>Perpaduan antara susu dengan sirup melon, memberikan sensasi creamy yang cocok untuk pecinta non kopi.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/12.jpg..jpg" alt="Pertamax" class="Menu-card-img" />
+          <h3 class="Menu-card">- Pertamax -</h3>
+          <p>Perpaduan antara susu dengan sirup rose, memberikan sensasi creamy yang cocok untuk pecinta non kopi.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/13.jpg..jpg" alt="Pertamax Plus" class="Menu-card-img" />
+          <h3 class="Menu-card">- Pertamax Plus -</h3>
+          <p>Perpaduan antara susu dengan sirup leci, memberikan sensasi creamy yang cocok untuk pecinta non kopi.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/14.jpg..jpg" alt="Tea" class="Menu-card-img" />
+          <h3 class="Menu-card">- Tea -</h3>
+          <p>Teh klasik yang disajikan hangat atau dingin, dengan cita rasa teh yang murni dan menyegarkan.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/16.jpg..jpg" alt="Lemon Tea" class="Menu-card-img" />
+          <h3 class="Menu-card">- Lemon Tea -</h3>
+          <p>Teh segar dengan tambahan perasan lemon yang memberi rasa asam segar dan menyegarkan, cocok untuk melepas dahaga.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/18.jpg..jpg" alt="Chocolate" class="Menu-card-img" />
+          <h3 class="Menu-card">- Chocolate -</h3>
+          <p>Minuman cokelat hangat atau dingin dengan rasa kaya dan lembut, pas untuk pencinta rasa manis dan cokelat bercita rasa tinggi.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/19.jpg..jpg" alt="Thai Tea" class="Menu-card-img" />
+          <h3 class="Menu-card">- Thai Tea -</h3>
+          <p>Teh khas Thailand dengan warna oranye yang menarik, rasa manis dan creamy, sering disajikan dengan susu kental manis atau susu evaporasi yang membuatnya kaya dan lezat.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/15.jpg..jpg" alt="Jeruk" class="Menu-card-img" />
+          <h3 class="Menu-card">- Jeruk -</h3>
+          <p>Minuman segar dengan rasa asam manis jeruk asli yang menyegarkan dahaga kapan saja.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/20.jpg..jpg" alt="Choco Oreo" class="Menu-card-img" />
+          <h3 class="Menu-card">- Choco Oreo -</h3>
+          <p>Cokelat lezat berpadu dengan potongan biskuit Oreo renyah, minuman manis yang pas untuk pencinta cokelat dan snack.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/21.jpg..jpg" alt="Matcha Latte" class="Menu-card-img" />
+          <h3 class="Menu-card">- Matcha Latte" -</h3>
+          <p>Perpaduan bubuk matcha Jepang berkualitas dan susu hangat, memberikan rasa pahit khas green tea yang lembut dan menenangkan.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/22.jpg..jpg" alt="Bubblegum latte" class="Menu-card-img" />
+          <h3 class="Menu-card">- Bubblegum latte -</h3>
+          <p>Kreasi unik latte dengan rasa bubblegum manis yang playful dan berwarna cerah, cocok untuk anak muda dan yang ingin sesuatu berbeda.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/23.jpg..jpg" alt="Jahe" class="Menu-card-img" />
+          <h3 class="Menu-card">- Jahe -</h3>
+          <p>Minuman tradisional hangat dengan rasa jahe pedas yang menyehatkan dan menghangatkan badan.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/24.jpg..jpg" alt="Jahe Susu" class="Menu-card-img" />
+          <h3 class="Menu-card">- Jahe Susu -</h3>
+          <p>Perpaduan jahe segar dan susu hangat, nikmat dan menghangatkan tubuh sekaligus menambah kenikmatan rasa.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/25.jpg..jpg" alt="Soda Senang" class="Menu-card-img" />
+          <h3 class="Menu-card">- Soda Senang -</h3>
+          <p>Minuman soda segar dengan sentuhan rasa buah dan soda yang menggembirakan, pilihan tepat untuk melepas dahaga dan bersantai.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/26.jpg..jpg" alt="Beras Kencur" class="Menu-card-img" />
+          <h3 class="Menu-card">- Beras Kencur -</h3>
+          <p>Minuman tradisional dengan perpaduan beras dan kencur, kaya manfaat kesehatan dan rasa hangat yang alami.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/17.jpg..jpg" alt="Teh Tarik" class="Menu-card-img" />
+          <h3 class="Menu-card">- Teh Tarik -</h3>
+          <p>Kombinasi teh hitam pekat dan susu kental manis yang dikocok hingga berbusa, menciptakan rasa gurih dan aroma khas yang menggoda.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/31.jpg..jpeg" alt="Sosis Bakar" class="Menu-card-img" />
+          <h3 class="Menu-card">-Sosis Bakar -</h3>
+          <p>Sosis bakar dengan bumbu khas yang meresap, beraroma menggugah dan cocok disantap hangat.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/32.jpg..jpg" alt="Rujak Cireng" class="Menu-card-img" />
+          <h3 class="Menu-card">- Rujak Cireng -</h3>
+          <p>Cireng gurih disiram bumbu rujak pedas manis, camilan khas Nusantara yang menggoda lidah.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/27.jpg..jpg" alt="Mix Platter" class="Menu-card-img" />
+          <h3 class="Menu-card">- Mix Platter -</h3>
+          <p>Piring kombinasi berisi berbagai makanan ringan lezat, pilihan ideal untuk berbagi dan menikmati berbagai rasa dalam satu sajian.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/28.jpg..jpg" alt="Kentang goreng" class="Menu-card-img" />
+          <h3 class="Menu-card">- Kentang goreng -</h3>
+          <p>PKentang potong renyah dengan tekstur lembut di dalam, cocok sebagai teman snack atau makanan pendamping.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/29.jpg..jpg" alt="Tahu Crispy" class="Menu-card-img" />
+          <h3 class="Menu-card">- Tahu Crispy -</h3>
+          <p>Tahu goreng renyah dengan balutan tepung spesial, makanan ringan bergizi dengan rasa gurih yang menggoda selera.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/30.jpg..jpg" alt="Donut Gula" class="Menu-card-img" />
+          <h3 class="Menu-card">- Donut Gula-</h3>
+          <p>Kue donat lembut, manis, dan empuk dengan gula berlimpah, camilan sempurna untuk segala suasana.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/33.jpg..jpg" alt="Roti Bakar" class="Menu-card-img" />
+          <h3 class="Menu-card">- Roti Bakar -</h3>
+          <p>Roti bakar renyah di luar, lembut di dalam dengan ragam topping pilihan, cemilan favorit sepanjang hari.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/34.jpg..jpg" alt="Pisang Keju" class="Menu-card-img" />
+          <h3 class="Menu-card">- Pisang Keju -</h3>
+          <p>Pisang goreng manis dengan taburan keju leleh gurih, perpaduan rasa klasik yang selalu dicari.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/35.jpg..jpg" alt="Chicken Nugget" class="Menu-card-img" />
+          <h3 class="Menu-card">- Chicken Nugget -</h3>
+          <p>Olahan daging ayam yang nikmat dan praktis sebagai camilan</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/36.jpg..jpg" alt="Scallop Ikan" class="Menu-card-img" />
+          <h3 class="Menu-card">- Scallop Ikan -</h3>
+          <p>scallop ikan segar yang gurih dan lembut, cocok untuk menu spesial dan selera istimewa.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/37.jpg..jpg" alt="Indomie Goreng" class="Menu-card-img" />
+          <h3 class="Menu-card">- Indomie Goreng -</h3>
+          <p>Mie goreng instan khas Indonesia dengan bumbu melimpah, cepat dan cocok untuk makan praktis dan lezat.</p>
+        </div>
+        <div class="Menu-card">
+          <img src="img/menu/38.jpg..jpg" alt="Indomie Kare" class="Menu-card-img" />
+          <h3 class="Menu-card">- Indomie Kare -</h3>
+          <p>Indomie rasa kari yang kaya rempah dengan kuah creamy, menggugah selera dan menghangatkan.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Menu Section end -->
+
+    <!-- Products Section start -->
+     <section class="products" id="products" x-data="products">
+      <h2><span>Produk Unggulan </span> Kami</h2>
+
+      <div class="row">
+        <template x-for="(item, index) in items" x-key="index">
+         <div class="product-card">
+          <div class="product-icons">
+            <a href="#" @click.prevent="$store.cart.add(item)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </a>
+            <a href="#" class="item-detail-button" @click.prevent> 
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </a>
+          </div>
+          <div class="product-image">
+            <img :src="`img/products/${item.img}`" :alt="item.name">
+          </div>
+          <div class="product-content">
+            <h3 x-text="item.name"></h3>
+            <div class="product-stars">
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <div class="product-price"><span x-text="rupiah(item.price)"></span></div> 
+          </div>
+        </template>
+      </div>
+    </section>
+    <!-- Products Section end -->
+
+    <!-- Contact Section start -->
+    <section id="contact" class="contact">
+      <h2><span>Kontak</span> Kami</h2>
+      <p>
+        Bleyerr Coffee buka setiap hari pukul 17.00 hingga 23.00 (kecuali hari rabu libur)
+      </p>
+      <div class="row">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.098161772396!2d112.71399639999998!3d-7.454391899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e190a4f01b0f%3A0x51ba276c593d958f!2sBLEYERR%20COFFEE%20SHISHA!5e0!3m2!1sid!2sid!4v1749699222461!5m2!1sid!2sid"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map"
+        ></iframe>
+
+        <form action="">
+          <div class="input-group">
+            <i data-feather="user"></i>
+            <input type="text" placeholder="Bleyerr Coffee" />
+          </div>
+          <div class="input-group">
+            <i data-feather="mail"></i>
+            <input type="text" placeholder="Bleyerr.coffee@gma.com" />
+          </div>
+          <div class="input-group">
+            <i data-feather="phone"></i>
+            <input type="text" placeholder="08977424168" />
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- Contact Section end -->
+
+    <!-- Keuangan Section start -->
+      <section class="keuangan" id="keuangan">
+        <main class="content">
+        <a href="https://docs.google.com/spreadsheets/d/1wKby7CUiq1PpkUEkwP_E5J-q1LdedwQS6lhUhHXbDeE/edit?usp=sharing" class="cta" >LAPORAN KEUANGAN BULAN APR-MEI-JUN</a>
+        </main>
+        <main class="content">
+        <a href="https://docs.google.com/spreadsheets/d/1YonJH5aM50ywLiFe5gyI-77ZbhJTci2ZRgosSQu5i8w/edit?usp=sharing" class="cta" >LAPORAN KEUANGAN BULAN JUL-AGT-SPT</a>
+        </main>
+        <main class="content">
+        <a href="https://docs.google.com/spreadsheets/d/18cTKMzdeuZSLxsCOisLnsE1_QFFoTfclGiIog_V3NUY/edit?usp=sharing" class="cta" >LAPORAN KEUANGAN BULAN OKT-NOV-DES</a>
+        </main>
+      </section>
+    <!-- Keuangan Section end -->
+
+    <!-- Footer start  -->
+    <footer>
+      <div class="socials">
+        <a href="https://www.instagram.com/bleyerrcoffee?utm_source=ig_web_button_share_sheet&igsh=MWYxY3M0ZTJjMjdmYg=="><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+        <a href="#"><i data-feather="youtube"></i></a>
+      </div>
+
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#Menu">Menu</a>
+        <a href="#contact">Kontak</a>
+      </div>
+
+      <div class="credit">
+        <p>Created by <a href="">Bleyerrcoffee.com</a> | &copy; 2025.</span></p>
+      </div>
+    </footer>
+    <!-- Footer end  -->
+
+    <!-- Modal Box Item Detail start -->
+     <div class="modal" id="item-detail-modal">
+      <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+          <img src="img/products/1.jpg" alt="Product 1">
+          <div class="product-content">
+            <h3>Product 1</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum distinctio sequi vitae neque debitis harum, dolores laborum enim hic delectus, deleniti est impedit cupiditate eum?</p>
+           <div class="product-stars">
+            <i data-feather="star" class="star-fill"></i>
+            <i data-feather="star" class="star-fill"></i>
+            <i data-feather="star" class="star-fill"></i>
+            <i data-feather="star" class="star-fill"></i>
+            <i data-feather="star" class="star-fill"></i>
+          </div>
+          <div class="product-price">IDR 30K <span>IDR 50K</span></div> 
+          <a href="#"><i class="bi bi-cart"></i><span>add to cart</span></a>
+          </div>
+        </div>
+      </div>
+     </div>
+    <!-- Modal Box Item Detail end -->
+
+    <!-- Feather Icons -->
+    <script>
+      feather.replace();
+    </script>
+
+    <!-- My Javascript -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
