@@ -616,7 +616,7 @@ footer .credit a {
 }
 
 /* Modal Animation */
- @keyframe animateModal {
+ .animateModal {
   from {
     top: -300px;
     opacity: 0;
