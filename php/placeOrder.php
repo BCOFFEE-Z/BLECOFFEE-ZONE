@@ -31,8 +31,8 @@ $params = array(
         'first_name' => $_POST['name'],
         'email' => $_POST['email'],
         'phone' => $_POST['phone'],
-    ),
+    )
 );
 
 $snapToken = \Midtrans\Snap::getSnapToken($params);
-echo $snapToken; 
+
