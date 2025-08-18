@@ -130,39 +130,39 @@ checkoutButton.addEventListener('click', async function (e) {
 //  window.open('http://wa.me/6283143195623?text=' + encodeURIComponent(message));
 
 // minta transaction token menggunakan ajax / fetch
-// try {
-//   const response = await fetch('php/placeOrder.php', {
-//     method: 'POST',
-//     body: data,
-//   });
-//   const token = await response.text();
-//   // console.log(token);
-//   window.snap.pay(token);
-// } catch (err) {
-//   console.log(err.message);
-//  };
-
-function ajaxGetToken(transactionData, callback){
-    var snapToken;
-    // Request get token to your server & save result to snapToken variable
-
-    if(snapToken){
-      callback(null, snapToken);
-    } else {
-      callback(new Error('Failed to fetch snap token'),null);
-    }
-}
-
-checkoutButton.onclick(function(){
-  snap.show();
-  ajaxGetToken(transactionData, function(error, snapToken){
-    if(error){
-      snap.hide();
-    } else {
-      snap.pay(snapToken);
-    }
+try {
+  const response = await fetch('php/placeOrder.php', {
+    method: 'POST',
+    body: data,
   });
-});
+  const token = await response.text();
+  // console.log(token);
+  window.snap.pay(token);
+} catch (err) {
+  console.log(err.message);
+ };
+
+// function ajaxGetToken(transactionData, callback){
+//     var snapToken;
+//     // Request get token to your server & save result to snapToken variable
+
+//     if(snapToken){
+//       callback(null, snapToken);
+//     } else {
+//       callback(new Error('Failed to fetch snap token'),null);
+//     }
+// }
+
+// payButton.onclick(function(){
+//   snap.show();
+//   ajaxGetToken(transactionData, function(error, snapToken){
+//     if(error){
+//       snap.hide();
+//     } else {
+//       snap.pay(snapToken);
+//     }
+//   });
+// });
 
 });
 
