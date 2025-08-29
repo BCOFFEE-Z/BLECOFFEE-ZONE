@@ -126,8 +126,8 @@ checkoutButton.addEventListener('click', async function (e) {
  const formData = new FormData(form);
  const data = new URLSearchParams(formData);
  const objData = Object.fromEntries(data);
-//  const message = formatMessage(objData);
-//  window.open('http://wa.me/6283143195623?text=' + encodeURIComponent(message));
+ const message = formatMessage(objData);
+ window.open('http://wa.me/6283143195623?text=' + encodeURIComponent(message));
 
 // minta transaction token menggunakan ajax / fetch
 try {
@@ -166,7 +166,7 @@ try {
 
 });
 
-// format pesan whatsapp
+// // format pesan whatsapp
 const formatMessage = (obj) => {
   return `Data Customer
     Nama: ${obj.name}
