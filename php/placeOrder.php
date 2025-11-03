@@ -34,5 +34,5 @@ $params = array(
     )
 );
 
-$snapToken = \Midtrans\Snap::getSnapToken($params);
-echo $snapToken;
+// $snapToken = \Midtrans\Snap::getSnapToken($params);
+// echo $snapToken;

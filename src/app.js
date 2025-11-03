@@ -1,44 +1,12 @@
 document.addEventListener('alpine:init', ()=> {
     Alpine.data('products', () => ({
         items: [
-            { id: 1, name: 'Kopiston Expresso', img: '1.jpg', price: 9000 },
-            { id: 2, name: 'Hot Crash Coffee', img: '2.jpg', price: 6000 },
-            { id: 3, name: 'Hot Coffee Tea', img: '3.jpg', price: 10000 },
-            { id: 4, name: 'Hot Coffee Tempoe doeloe', img: '4.jpg', price: 7000 },
-            { id: 5, name: 'Hot Drip Coffee', img: '5.jpg', price: 8000 },
-            { id: 6, name: 'Hot Frenchpress Coffee', img: '6.jpg', price: 12000 },
-            { id: 7, name: 'ice Coffee Palm Sugar', img: '7.jpg', price: 13000 },
-            { id: 8, name: 'ice Coffee Sweet Milk', img: '8.jpg', price: 13000 },
-            { id: 9, name: 'Biosolar', img: '9.jpg', price: 12000 },
-            { id: 10, name: 'Premium', img: '10.jpg', price: 12000 },
-            { id: 11, name: 'Pertalite', img: '11.jpg', price: 12000 },
-            { id: 12, name: 'Pertamax', img: '12.jpg', price: 12000 },
-            { id: 13, name: 'Pertamax Plus', img: '13.jpg', price: 12000 },
-            { id: 14, name: 'Tea', img: '14.jpg', price: 4000 },
-            { id: 15, name: 'Jeruk', img: '15.jpg', price: 6000 },
-            { id: 16, name: 'Lemon Tea', img: '16.jpg', price: 5000 },
-            { id: 17, name: 'Teh Tarik', img: '17.jpg', price: 10000 },
-            { id: 18, name: 'Chocolate', img: '18.jpg', price: 7000 },
-            { id: 19, name: 'Thai Tea', img: '19.jpg', price: 10000 },
-            { id: 20, name: 'Choco Oreo', img: '20.jpg', price: 12000 },
-            { id: 21, name: 'Matcha Latte', img: '21.jpg', price: 10000 },
-            { id: 22, name: 'Bubblegum latte', img: '22.jpg', price: 10000 },
-            { id: 23, name: 'Jahe', img: '23.jpg', price: 6000 },
-            { id: 24, name: 'Jahe Susu', img: '24.jpg', price: 11000 },
-            { id: 25, name: 'Soda Senang', img: '25.jpg', price: 13000 },
-            { id: 26, name: 'Beras Kencur', img: '26.jpg', price: 7000 },
-            { id: 27, name: 'Mix Platter', img: '27.jpg', price: 9000 },
-            { id: 28, name: 'Kentang goreng', img: '28.jpg', price: 12000 },
-            { id: 29, name: 'Tahu Crispy', img: '29.jpg', price: 10000 },
-            { id: 30, name: 'Donut', img: '30.jpg', price: 9000 },
-            { id: 31, name: 'Sosis Bakar', img: '31.jpeg', price: 18000 },
-            { id: 32, name: 'Rujak Cireng', img: '32.jpg', price: 10000 },
-            { id: 33, name: 'Roti Bakar', img: '33.jpg', price: 14000 },
-            { id: 34, name: 'Pisang Keju', img: '34.jpg', price: 13000 },
-            { id: 35, name: 'Chicken Nugget', img: '35.jpg', price: 17000 },
-            { id: 36, name: 'Scallop Ikan', img: '36.jpg', price: 12000 },
-            { id: 37, name: 'Indomie Goreng', img: '37.jpg', price: 7000 },
-            { id: 38, name: 'Indomie Kare', img: '38.jpg', price: 7000 },
+            { id: 1, name: '-- Bleyerr Coffee Saku -- <> PALM SUGAR <>', img: '1.jpeg', price: 18000 },
+            { id: 2, name: '-- Bleyerr Coffee Saku -- <> AMERICANO <>', img: '2.jpeg', price: 18000 },
+            { id: 3, name: '-- Bleyerr Coffee Saku -- <> COKELAT LATTE <>', img: '3.jpeg', price: 13000 },
+            { id: 4, name: '-- Bleyerr Coffee Saku -- <> TEH TARIK <>', img: '4.jpeg', price: 13000 },
+            { id: 5, name: '-- Bleyerr Coffee Saku -- <> MATCHA <>', img: '5.jpeg', price: 13000 },
+           
         ],
     }));
 
@@ -121,48 +89,26 @@ form.addEventListener('keyup', function () {
 });
 
 //  kirim data ketika tombol checkout diklik
-checkoutButton.addEventListener('click', async function (e) { 
+checkoutButton.addEventListener('click', function (e) { 
  e.preventDefault();
  const formData = new FormData(form);
  const data = new URLSearchParams(formData);
  const objData = Object.fromEntries(data);
  const message = formatMessage(objData);
- window.open('http://wa.me/6283143195623?text=' + encodeURIComponent(message));
+ window.open('http://wa.me/628977424168?text=' + encodeURIComponent(message));
 
 // minta transaction token menggunakan ajax / fetch
 try {
-  const response = await fetch('php/placeOrder.php', {
+  const response =  fetch ('php/placeOrder.php', {
     method: 'POST',
     body: data,
   });
-  const token = await response.text();
+  const token = response.text();
   // console.log(token);
   window.snap.pay(token);
 } catch (err) {
   console.log(err.message);
  };
-
-// function ajaxGetToken(transactionData, callback){
-//     var snapToken;
-//     // Request get token to your server & save result to snapToken variable
-
-//     if(snapToken){
-//       callback(null, snapToken);
-//     } else {
-//       callback(new Error('Failed to fetch snap token'),null);
-//     }
-// }
-
-// payButton.onclick(function(){
-//   snap.show();
-//   ajaxGetToken(transactionData, function(error, snapToken){
-//     if(error){
-//       snap.hide();
-//     } else {
-//       snap.pay(snapToken);
-//     }
-//   });
-// });
 
 });
 
@@ -171,7 +117,7 @@ const formatMessage = (obj) => {
   return `Data Customer
     Nama: ${obj.name}
     No HP: ${obj.phone}
-    Email: ${obj.email}
+    Alamat: ${obj.alamat}
 Data Pesanan
   ${JSON.parse(obj.items).map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)}) \n`)}
 TOTAL: ${rupiah(obj.total)}
