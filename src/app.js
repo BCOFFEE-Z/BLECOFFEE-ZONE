@@ -1,11 +1,11 @@
 document.addEventListener('alpine:init', ()=> {
     Alpine.data('products', () => ({
         items: [
-            { id: 1, name: '-- Bleyerr Coffee Saku -- <> - PALM SUGAR - <>', img: '1.jpeg', price: 18000 },
-            { id: 2, name: '-- Bleyerr Coffee Saku -- <> - AMERICANO - <>', img: '2.jpeg', price: 18000 },
-            { id: 3, name: '-- Bleyerr Coffee Saku -- <> - COKELAT LATTE - <>', img: '3.jpeg', price: 13000 },
-            { id: 4, name: '-- Bleyerr Coffee Saku -- <> - TEH TARIK - <>', img: '4.jpeg', price: 13000 },
-            { id: 5, name: '-- Bleyerr Coffee Saku -- <> - MATCHA - <>', img: '5.jpeg', price: 13000 },
+            { id: 1, name: '-- Bleyerr Coffee Saku -- PALM SUGAR ', img: '1.jpeg', price: 18000 },
+            { id: 2, name: '-- Bleyerr Coffee Saku -- AMERICANO ', img: '2.jpeg', price: 18000 },
+            { id: 3, name: '-- Bleyerr Coffee Saku -- COKELAT LATTE ', img: '3.jpeg', price: 13000 },
+            { id: 4, name: '-- Bleyerr Coffee Saku -- TEH TARIK ', img: '4.jpeg', price: 13000 },
+            { id: 5, name: '-- Bleyerr Coffee Saku -- MATCHA ', img: '5.jpeg', price: 13000 },
            
         ],
     }));
